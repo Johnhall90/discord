@@ -14,11 +14,6 @@ not_filth = ["ok", "ok?", "ok..."]
 emojis = ['🆗', '🙂']
 count = 0
 
-def add_count():
-    count = + 1
-def reset_count():
-    count = 0
-
 @bot.event
 async def on_message(message):
         cringe = message.content
