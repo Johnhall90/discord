@@ -34,10 +34,6 @@ bangalore = [                          #Array of file locations to satellite gif
 
 bot.remove_command("help")
 
-def is_connected(ctx):
-    voice_client = get_args(ctx.bot.voice_clients, guild=ctx.guild)
-    return voice_client and voice_client.is_connected()
-
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game('!help you stinkers'))
@@ -84,18 +80,24 @@ async def lou(ctx):
 
 @bot.command()
 async def help(ctx):
-    em = discord.Embed(title = "Help", description = "Use the prefix '!' to invoke commands so you feel like big hacker boy.", color = discord.Color.green())
+    em = discord.Embed(title = "Text Channel Commands", description = "Use the prefix '!' to invoke commands so you feel like big hacker boy.", color = discord.Color.green())
     em.add_field(name = '!who', value = 'Who asked?')
-    em.add_field(name = '!find', value = 'Call on the NASA satellite infrastructure via Andrew')
+    em.add_field(name = '!lou', value = 'funni emote')
     em.add_field(name = '!tip', value = '!tip <value> to calculate tip/total')
     em.add_field(name = '!mark', value = 'Markov bot is always listening')
-    em.add_field(name = '!lou', value = 'funni emote')
-    em.add_field(name = '!fart', value = 'fart')
-    em.add_field(name = '!monke', value = 'monke')
-    em.add_field(name = '!bang', value = 'worse legend')
-    em.add_field(name = '!stop', value = 'monke leave')
-
+    em.add_field(name = '!find', value = 'Call on the NASA satellite infrastructure via Andrew', inline=False)
+    em.set_thumbnail(url="https://i.imgur.com/TJfM6Q8.jpg")
+    em.set_author(name="Monke",url="https://i.imgur.com/TJfM6Q8.jpg",icon_url="https://i.imgur.com/TJfM6Q8.jpg")
     await ctx.send(embed = em)
+
+    em2 = discord.Embed(title = "Voice Channel Commands", description = "These commands require you to be in a voice channel.", color = discord.Color.red())
+    em2.add_field(name = '!fart', value = 'fart')
+    em2.add_field(name = '!monke', value = 'monke')
+    em2.add_field(name = '!bang', value = 'worse legend')
+    em2.add_field(name = '!stop', value = 'monke leave')
+    em2.set_thumbnail(url="https://i.imgur.com/TJfM6Q8.jpg")
+    em2.set_author(name="Monke",url="https://i.imgur.com/TJfM6Q8.jpg",icon_url="https://i.imgur.com/TJfM6Q8.jpg")
+    await ctx.send(embed = em2)
 
 @bot.command()
 async def fart(ctx):
