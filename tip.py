@@ -23,7 +23,7 @@ satellite = [                          #Array of file locations to satellite gif
               '/home/jhall/images/satt5.gif'  
             ]
 
-bangalore = [                          #Array of file locations to satellite gifs
+bangalore = [                          #Array of file locations to bangalore audio
               '/home/jhall/sounds/lifeline.mp3',
               '/home/jhall/sounds/steel.wav',
               '/home/jhall/sounds/smoke.wav',
@@ -106,7 +106,7 @@ async def fart(ctx):
     server = ctx.message.guild
     voice_channel = server.voice_client
     voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/wet-fart_1.mp3')))
-    time.sleep(2)
+    time.sleep(1.25)
     await server.voice_client.disconnect()
 
 @bot.command()
