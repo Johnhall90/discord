@@ -1,8 +1,12 @@
 # bot.py
 import os
 import random #random class used to pick random gif from array
+import time
+from typing import get_args
 
 import discord
+from discord import message
+from discord.enums import _create_value_cls
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -18,6 +22,26 @@ satellite = [                          #Array of file locations to satellite gif
               '/home/jhall/images/satt4.gif',
               '/home/jhall/images/satt5.gif'  
             ]
+
+bangalore = [                          #Array of file locations to satellite gifs
+              '/home/jhall/sounds/lifeline.mp3',
+              '/home/jhall/sounds/steel.wav',
+              '/home/jhall/sounds/smoke.wav',
+              '/home/jhall/sounds/iron.wav',
+              '/home/jhall/sounds/foxtrot.wav',
+              '/home/jhall/sounds/ambush.wav'  
+            ]
+
+bot.remove_command("help")
+
+def is_connected(ctx):
+    voice_client = get_args(ctx.bot.voice_clients, guild=ctx.guild)
+    return voice_client and voice_client.is_connected()
+
+@bot.event
+async def on_ready():
+    await bot.change_presence(activity=discord.Game('!help you stinkers'))
+    
 
 #Tip command to invoke math on tipping at restaraunts
 @bot.command()
@@ -57,5 +81,51 @@ async def find(ctx):
 async def lou(ctx):
     channel = ctx.channel
     await channel.send(file=discord.File('/home/jhall/images/loustrW.png'))
+
+@bot.command()
+async def help(ctx):
+    em = discord.Embed(title = "Help", description = "Use the prefix '!' to invoke commands so you feel like big hacker boy.", color = discord.Color.green())
+    em.add_field(name = '!who', value = 'Who asked?')
+    em.add_field(name = '!find', value = 'Call on the NASA satellite infrastructure via Andrew')
+    em.add_field(name = '!tip', value = '!tip <value> to calculate tip/total')
+    em.add_field(name = '!mark', value = 'Markov bot is always listening')
+    em.add_field(name = '!lou', value = 'funni emote')
+    em.add_field(name = '!fart', value = 'fart')
+    em.add_field(name = '!monke', value = 'monke')
+    em.add_field(name = '!bang', value = 'worse legend')
+    em.add_field(name = '!stop', value = 'monke leave')
+
+    await ctx.send(embed = em)
+
+@bot.command()
+async def fart(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/wet-fart_1.mp3')))
+    time.sleep(2)
+    await server.voice_client.disconnect()
+
+@bot.command()
+async def monke(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/UH OH.mp3')))
+
+@bot.command()
+async def bang(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=(random.choice(bangalore))))
+    time.sleep(4.35)
+    await server.voice_client.disconnect()
+@bot.command()
+async def stop(ctx):
+    await ctx.guild.voice_client.disconnect()
 
 bot.run(TOKEN)
