@@ -52,4 +52,10 @@ async def find(ctx):
     channel = ctx.channel
     await channel.send('One moment...searching the globe for askers...' , file=discord.File(random.choice(satellite))) #choose random file location of gifs
     await channel.send('NASA couldn\'t find any askers...')
+
+@bot.command()
+async def lou(ctx):
+    channel = ctx.channel
+    await channel.send(file=discord.File('/home/jhall/images/loustrW.png'))
+
 bot.run(TOKEN)
