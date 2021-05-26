@@ -38,9 +38,13 @@ async def on_message(message):
                     await channel.send('ok...bro??')
                 elif count == 3:
                     channel = message.channel
-                    await channel.send('DUDE stop')
-                    await channel.send('....?')
-                    await channel.send('ok')
+                    em = discord.Embed(title = "seriously stop", description = "bro STOP seriously saying ok", color = discord.Color.orange())
+                    em.add_field(name = '.', value = 'DUDE stop', inline=False)
+                    em.add_field(name = '.', value = '....?', inline=False)
+                    em.add_field(name = '.', value = 'ok', inline=False)
+                    em.set_thumbnail(url="https://i.imgur.com/TJfM6Q8.jpg")
+                    em.set_author(name="Monke",url="https://i.imgur.com/TJfM6Q8.jpg",icon_url="https://i.imgur.com/TJfM6Q8.jpg")
+                    await channel.send(embed = em)
                     count = 0
                 else:   
                     await channel.send('ok')
