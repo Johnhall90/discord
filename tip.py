@@ -3,12 +3,15 @@ import os
 import random #random class used to pick random gif from array
 import time
 from typing import get_args
-
+from warnings import resetwarnings
+import googletrans
+from googletrans import Translator
 import discord
 from discord import message
 from discord.enums import _create_value_cls
 from dotenv import load_dotenv
 from discord.ext import commands
+from googletrans.constants import LANGCODES
 
 load_dotenv()
 TOKEN = os.getenv('TIP_TOKEN')
@@ -129,5 +132,13 @@ async def bang(ctx):
 @bot.command()
 async def stop(ctx):
     await ctx.guild.voice_client.disconnect()
+
+@bot.command()
+async def translate(ctx, lang):
+    if lang == "help":
+        em3 = discord.Embed(title = "Languages available for translating", description = "Use !translate <language code> to select a language.", color = discord.Color.green())
+        em3.add_field(name = 'See below', value = 'Language codes available in this text file:')
+        await ctx.send(embed = em3)
+        await ctx.send(file=discord.File("/home/jhall/discord/langs.txt"))     
 
 bot.run(TOKEN)
