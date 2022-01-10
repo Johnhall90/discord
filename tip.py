@@ -4,14 +4,11 @@ import random #random class used to pick random gif from array
 import time
 from typing import get_args
 from warnings import resetwarnings
-import googletrans
-from googletrans import Translator
 import discord
 from discord import message
 from discord.enums import _create_value_cls
 from dotenv import load_dotenv
 from discord.ext import commands
-from googletrans.constants import LANGCODES
 
 load_dotenv()
 TOKEN = os.getenv('TIP_TOKEN')
@@ -98,6 +95,9 @@ async def help(ctx):
     em2.add_field(name = '!monke', value = 'monke')
     em2.add_field(name = '!bang', value = 'worse legend')
     em2.add_field(name = '!stop', value = 'monke leave')
+    em2.add_field(name = '!bugs', value = 'I\'ve been here before')
+    em2.add_field(name = '!dws', value = 'Double-wide surprise')
+    em2.add_field(name = '!mmm', value = 'You got a tight little man bussy')
     em2.set_thumbnail(url="https://i.imgur.com/TJfM6Q8.jpg")
     em2.set_author(name="Monke",url="https://i.imgur.com/TJfM6Q8.jpg",icon_url="https://i.imgur.com/TJfM6Q8.jpg")
     await ctx.send(embed = em2)
@@ -121,6 +121,56 @@ async def monke(ctx):
     voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/UH OH.mp3')))
 
 @bot.command()
+async def ankha(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/ankha.mp3')))
+    time.sleep(100.00)
+    await server.voice_client.disconnect()
+
+@bot.command()
+async def verysecret(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/vent.mp3')))
+    time.sleep(2.00)
+    await server.voice_client.disconnect()
+
+@bot.command()
+async def bugs(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/bugs.mp3')))
+    time.sleep(5.00)
+    await server.voice_client.disconnect()
+
+@bot.command()
+async def dws(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/dws.mp3')))
+    time.sleep(6.00)
+    await server.voice_client.disconnect()
+
+@bot.command()
+async def mmm(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=('/home/jhall/sounds/mmm.mp3')))
+    time.sleep(7.00)
+    await server.voice_client.disconnect()
+
+@bot.command()
 async def bang(ctx):
     channel = ctx.message.author.voice.channel
     await channel.connect()
@@ -129,16 +179,25 @@ async def bang(ctx):
     voice_channel.play(discord.FFmpegPCMAudio(executable="/usr/bin/ffmpeg", source=(random.choice(bangalore))))
     time.sleep(4.35)
     await server.voice_client.disconnect()
+
 @bot.command()
 async def stop(ctx):
     await ctx.guild.voice_client.disconnect()
 
 @bot.command()
-async def translate(ctx, lang):
-    if lang == "help":
-        em3 = discord.Embed(title = "Languages available for translating", description = "Use !translate <language code> to select a language.", color = discord.Color.green())
-        em3.add_field(name = 'See below', value = 'Language codes available in this text file:')
-        await ctx.send(embed = em3)
-        await ctx.send(file=discord.File("/home/jhall/discord/langs.txt"))     
+async def dn(ctx):
+    channel = ctx.channel
+    dn_file = open("/home/jhall/discord/counter.txt","r+")
+    dn_counter = dn_file.readline()
+    counter = int(dn_counter)
+    counter += 1
+    dn_counter = str(counter)
+    print(dn_counter)
+    
+    dn_file.seek(0)
+    dn_file.write(dn_counter)
+    dn_file.truncate()
+    dn_file.close()
+    await channel.send("DEEZ NUTS <:GOTTEM:852236935836991488> | successfully gottemed " + dn_counter + " beeshes")
 
 bot.run(TOKEN)

@@ -9,19 +9,30 @@ TOKEN = os.getenv('OK_TOKEN')
 
 bot = discord.Client()
 
-filth = ["oK.", "ok.", "Ok", "oK", "Ok.", "OK", "OK.", "0k", "0k.", "0K", "0K."]
+filth = ["oK.", "ok.", "Ok", "oK", "Ok.", "OK", "OK.", "0k", "0k.", "0K", "0K.", "!vent"]
 not_filth = ["ok", "ok?", "ok..."]
 emojis = ['🆗', '🙂']
 count = 0
+vent = "!vent"
+sussy = "ifunny"
 
 @bot.event
 async def on_message(message):
         cringe = message.content
         if cringe in filth: #checks if shitty ok spelling is in the message
-            await message.channel.purge(limit=1) #delete the message
-            channel = message.channel #sets to current channel message was sent in
-            await channel.send('Fuck you '+message.author.mention) #@ the user
-            await channel.send(file=discord.File('/home/jhall/images/tenor.gif')) #send knuckles gif
+            if vent in cringe:
+                await message.channel.purge(limit=1) #delete the message
+                channel = message.channel #sets to current channel message was sent in
+                await channel.send('||<Redacted>||'+message.author.mention) #@ the user
+            elif sussy in cringe:
+                await message.channel.purge(limit=1) #delete the message
+                channel = message.channel #sets to current channel message was sent in
+                await channel.send('Fuck you, no cringey ifunny links in here'+message.author.mention) #@ the user
+            else:
+                await message.channel.purge(limit=1) #delete the message
+                channel = message.channel #sets to current channel message was sent in
+                await channel.send('Fuck you '+message.author.mention) #@ the user
+                await channel.send(file=discord.File('/home/jhall/images/tenor2.gif')) #send knuckles gif
         elif cringe in not_filth: #checks for the only correct spelling of ok
             channel = message.channel
             if message.author == bot.user:
