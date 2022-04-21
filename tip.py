@@ -1,4 +1,4 @@
-# bot.py
+#!/usr/bin/python3
 import os
 import random #random class used to pick random gif from array
 import time
@@ -9,6 +9,7 @@ from discord import message
 from discord.enums import _create_value_cls
 from dotenv import load_dotenv
 from discord.ext import commands
+import lights
 
 load_dotenv()
 TOKEN = os.getenv('TIP_TOKEN')
@@ -199,5 +200,10 @@ async def dn(ctx):
     dn_file.truncate()
     dn_file.close()
     await channel.send("DEEZ NUTS <:GOTTEM:852236935836991488> | successfully gottemed " + dn_counter + " beeshes")
+
+@bot.command()
+async def color(ctx, arg):
+    print(arg)
+    lights.changeColor(arg)
 
 bot.run(TOKEN)
