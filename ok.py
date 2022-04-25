@@ -13,7 +13,7 @@ filth = ["oK.", "ok.", "Ok", "oK", "Ok.", "OK", "OK.", "0k", "0k.", "0K", "0K.",
 not_filth = ["ok", "ok?", "ok..."]
 emojis = ['🆗', '🙂']
 count = 0
-vent = "!vent"
+vent = "!verysecret"
 sussy = "ifunny"
 
 @bot.event
