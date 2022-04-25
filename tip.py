@@ -2,14 +2,19 @@
 import os
 import random #random class used to pick random gif from array
 import time
-from typing import get_args
-from warnings import resetwarnings
+import lights
+import threading
 import discord
 from discord import message
 from discord.enums import _create_value_cls
 from dotenv import load_dotenv
 from discord.ext import commands
+<<<<<<< HEAD
 import lights
+=======
+from typing import get_args
+from warnings import resetwarnings
+>>>>>>> bd1789f688dc14104b5420c7be1d1981876982be
 
 load_dotenv()
 TOKEN = os.getenv('TIP_TOKEN')
@@ -182,7 +187,7 @@ async def bang(ctx):
     await server.voice_client.disconnect()
 
 @bot.command()
-async def stop(ctx):
+async def stopmonke(ctx):
     await ctx.guild.voice_client.disconnect()
 
 @bot.command()
@@ -203,12 +208,62 @@ async def dn(ctx):
 
 @bot.command()
 async def color(ctx, arg):
+<<<<<<< HEAD
     print(arg)
+=======
+>>>>>>> bd1789f688dc14104b5420c7be1d1981876982be
     lights.changeColor(arg)
     
 @bot.command()
 async def level(ctx, arg):
+<<<<<<< HEAD
     print(arg)
     lights.changeBrightness(arg)
 
+=======
+    lights.changeBrightness(arg)
+
+@bot.command()
+async def off(ctx):
+    lights.changeState("false")
+
+@bot.command()
+async def on(ctx):
+    lights.changeState("true")
+
+@bot.command()
+async def hue(ctx, arg):
+    arg = int(arg)
+    if arg > 0 and arg <= 65535:
+        lights.changeHue(arg)
+    else:
+        channel = ctx.channel
+        await channel.send("Hue value must be between 1 and 65535 :)")
+
+@bot.command()
+async def sat(ctx, arg):
+    arg = int(arg)
+    if arg >= 0 and arg <= 254:
+        lights.changeSaturation(arg)
+    else:
+        channel = ctx.channel
+        await channel.send("Saturation value must be between 0 and 254 :)")
+
+global th
+th = None
+
+@bot.command()
+async def party(ctx):
+    global th
+    if th is None or not th.is_alive():
+        th = threading.Thread(target=lights.party)
+        th.start()
+
+@bot.command()
+async def stop(ctx):
+    global th
+    th.keepPartying = False
+    await ctx.channel.send("D:")
+
+>>>>>>> bd1789f688dc14104b5420c7be1d1981876982be
 bot.run(TOKEN)

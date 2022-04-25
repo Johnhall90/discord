@@ -1,12 +1,20 @@
 #!/usr/bin/python3
-import cv2
-import time
+import cv2,time,threading
 from datetime import datetime
+imagesFolder = "/home/jhall/Pictures"
 
-global imagesFolder
-imagesfolder = "/home/jhall/Pictures"
 
-def capture():
+def get_frame(imagesFolder):
+    cap = cv2.VideoCapture("rtsp://jhall:j1690h1990@192.168.1.106/live")
+    ret, frame = cap.read()
+
+    filename = imagesFolder + "/pooky" + ".jpg"
+    cv2.imwrite(filename, frame)
+    cap.release()
+    print ("Done!")
+    cv2.destroyAllWindows()
+
+def capture(imagesFolder):
     #cap = cv2.VideoCapture("rtsp://username:password@cameraIP/axis-media/media.amp")
     # Use public RTSP Streaming for testing:
     cap = cv2.VideoCapture("rtsp://jhall:j1690h1990@192.168.1.106/live")
@@ -49,3 +57,7 @@ def capture():
     print ("Done!")
 
     cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    #threading.Thread(target=capture(imagesFolder)).start()
+    get_frame(imagesFolder)
